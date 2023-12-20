@@ -1,0 +1,11 @@
+/*!
+  * shared v9.4.1
+  * (c) 2023 kazuya kawaguchi
+  * Released under the MIT License.
+  */
+
+/*!
+  * vue-i18n v9.4.1
+  * (c) 2023 kazuya kawaguchi
+  * Released under the MIT License.
+  */
