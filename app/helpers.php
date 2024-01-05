@@ -667,7 +667,6 @@ if (! function_exists('module_exist')) {
 function storeMediaFile($module, $file, $key = 'feature_image')
 {
     if (isset($module) && isset($file)) {
-        $module->clearMediaCollection($key);
         $mediaItems = $module->addMedia($file)->toMediaCollection($key);
     }
 

@@ -14,11 +14,11 @@ class EmployeeResource extends JsonResource
      */
     public function toArray($request)
     {
-        return [
+        $response = [
             'id' => $this->id,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
-            'full_name' => $this->first_name.' '.$this->last_name,
+            'full_name' => $this->first_name . ' ' . $this->last_name,
             'email' => $this->email,
             'mobile' => $this->mobile,
             'player_id' => $this->player_id,
@@ -43,7 +43,18 @@ class EmployeeResource extends JsonResource
             'dribbble_link' => $this->profile->dribbble_link ?? null,
             'latitude' => $this->latitude,
             'longitude' => $this->longitude,
-            'distance' => number_format($this->distance * 0.621371,2)
+            'distance' => number_format($this->distance * 0.621371, 2)
         ];
+
+        if ($this->user_type == 'boarder') {
+            $response['location_images'] = $this->location_images;
+            $response['location_prices'] = [
+                'lodging_price' => $this->profile->lodging_price ?? null,
+                'kindergarten_price' => $this->profile->kindergarten_price ?? null,
+                'complete_care_price' => $this->profile->complete_care_price ?? null
+            ];
+        }
+
+        return $response;
     }
 }

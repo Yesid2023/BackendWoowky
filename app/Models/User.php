@@ -67,7 +67,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
       'user_setting' => 'array',
     ];
 
-    protected $appends = ['full_name', 'profile_image'];
+    protected $appends = ['full_name', 'profile_image', 'location_images'];
 
     public function getFullNameAttribute() // notice that the attribute name is in CamelCase.
     {
@@ -143,6 +143,11 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         $media = $this->getFirstMediaUrl('profile_image');
 
         return isset($media) && ! empty($media) ? $media : asset(config('app.avatar_base_path').'avatar.png');
+    }
+
+    protected function getLocationImagesAttribute()
+    {
+        return $this->getMedia('location_images');
     }
 
     // Employee Relations

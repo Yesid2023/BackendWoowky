@@ -19,6 +19,7 @@ class ServiceDurationResource extends JsonResource
             'duration' => $this->duration,
             'price' => $this->price,
             'type' => $this->type,
+            'modality' => $this->modality,
             'status' => $this->status,
             'created_by' => $this->created_by,
             'updated_by' => $this->updated_by,

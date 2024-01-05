@@ -11,7 +11,17 @@ class UserProfile extends Model
     use HasFactory;
     use SoftDeletes;
 
-    protected $fillable = ['about_self', 'expert', 'facebook_link', 'instagram_link', 'twitter_link', 'dribbble_link'];
+    protected $fillable = [
+        'about_self', 
+        'expert', 
+        'facebook_link', 
+        'instagram_link', 
+        'twitter_link', 
+        'dribbble_link', 
+        'lodging_price',
+        'kindergarten_price',
+        'complete_care_price',
+    ];
 
     public function user()
     {

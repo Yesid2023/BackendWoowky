@@ -138,6 +138,17 @@ class ServiceDurationController extends Controller
                         ->editColumn('price', function ($data) {
                             return \Currency::format($data->price);
                         })
+                        ->editColumn('modality', function ($data) {
+                            $modality = $data->modality;
+                            switch ($modality) {
+                                case 'group':
+                                    return 'Grupo';
+                                    break;
+                                default:
+                                    return 'Individual';
+                                    break;
+                            }
+                        })
                         // ->editColumn('updated_at', function ($data) {
                         //     $module_name = $this->module_name;
 

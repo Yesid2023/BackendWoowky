@@ -59,6 +59,10 @@ return [
     'latitude' => 'Latitude',
     'longitude' => 'Longitude',
     'all_commission' => 'All Commission',
-
-
+    'location'  => 'Location',
+    'prices' => 'Prices',
+    'lodging_price' => 'Lodging Price',
+    'kindergarten_price' => 'Kindergarten Price',
+    'complete_care_price' => 'Complete Care Price',
+    'location' => 'Location',
 ];

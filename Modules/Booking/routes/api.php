@@ -14,5 +14,5 @@ Route::group(['middleware' => 'auth:sanctum', 'as' => 'backend.'], function () {
     Route::get('search-booking', [BookingsController::class, 'searchBookings']);
     Route::post('save-payment', [PaymentController::class, 'savePayment']);
     Route::post('save-booking', [BookingsController::class, 'store']);
-
+    Route::post('wompi-payment', [PaymentController::class, 'wompiPayment']);
 });

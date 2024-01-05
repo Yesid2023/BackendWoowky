@@ -61,5 +61,7 @@ return [
     'updated_at' => 'Updated At',
     'all_categories' => 'All Categories',
     'all_sub_cat' => 'All Sub Categories',
-
+    'lbl_modality' => 'Modality',
+    'single' => 'Single',
+    'group' => 'Group',
 ];

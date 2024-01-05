@@ -85,6 +85,11 @@
         title: "{{__('service.lbl_price')}}"
       },
       {
+        data: 'modality',
+        name: 'modality',
+        title: "{{__('service.lbl_modality')}}"
+      },
+      {
         data: 'status',
         name: 'status',
         orderable: false,
