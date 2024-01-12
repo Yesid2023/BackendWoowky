@@ -64,4 +64,5 @@ return [
     'lbl_modality' => 'Modality',
     'single' => 'Single',
     'group' => 'Group',
+    'lbl_sessions' => 'Sessions',
 ];

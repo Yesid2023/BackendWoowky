@@ -56,7 +56,7 @@ return [
     'service_facility' => 'Serviceeinrichtung',
     'training_service' => 'Schulungsdienst',
     'duration' => 'Dauer',
-    'system_services' => 'Systemdienste'
-
+    'system_services' => 'Systemdienste',
+    'lbl_sessions' => 'Sitzungen',
 
 ];

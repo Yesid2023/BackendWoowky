@@ -61,5 +61,8 @@ return [
     'updated_at' => 'Actualizado en',
     'all_categories' => 'todas las categorias',
     'all_sub_cat' => 'Todas las subcategorías',
-
+    'lbl_modality' => 'Modalidad',
+    'single' => 'Individual',
+    'group' => 'Grupo',
+    'lbl_sessions' => 'Sesiones',
 ];

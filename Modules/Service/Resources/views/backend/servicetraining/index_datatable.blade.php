@@ -82,6 +82,16 @@
         title: "{{__('service.lbl_name')}}"
       },
       {
+        data: 'sessions',
+        name: 'sessions',
+        title: "{{__('service.lbl_sessions')}}"
+      },
+      {
+        data: 'price',
+        name: 'price',
+        title: "{{__('service.lbl_price')}}"
+      },
+      {
         data: 'status',
         name: 'status',
         orderable: false,
