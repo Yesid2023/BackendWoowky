@@ -664,9 +664,12 @@ if (! function_exists('module_exist')) {
     }
 }
 
-function storeMediaFile($module, $file, $key = 'feature_image')
+function storeMediaFile($module, $file, $key = 'feature_image', $clearCollection = true)
 {
     if (isset($module) && isset($file)) {
+        if ($clearCollection) {
+            $module->clearMediaCollection($key);
+        }
         $mediaItems = $module->addMedia($file)->toMediaCollection($key);
     }
 

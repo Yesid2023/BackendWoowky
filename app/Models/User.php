@@ -64,14 +64,14 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     ];
 
     protected $casts = [
-      'user_setting' => 'array',
+        'user_setting' => 'array',
     ];
 
     protected $appends = ['full_name', 'profile_image', 'location_images'];
 
     public function getFullNameAttribute() // notice that the attribute name is in CamelCase.
     {
-        return $this->first_name.' '.$this->last_name;
+        return $this->first_name . ' ' . $this->last_name;
     }
 
     /**
@@ -142,12 +142,20 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     {
         $media = $this->getFirstMediaUrl('profile_image');
 
-        return isset($media) && ! empty($media) ? $media : asset(config('app.avatar_base_path').'avatar.png');
+        return isset($media) && !empty($media) ? $media : asset(config('app.avatar_base_path') . 'avatar.png');
     }
 
     protected function getLocationImagesAttribute()
     {
-        return $this->getMedia('location_images');
+        $medias = $this->getMedia('location_images');
+
+        $mediaUrls = [];
+
+        foreach ($medias as $key => $media) {
+            $mediaUrls[] =  $media->getUrl();
+        }
+
+        return $mediaUrls;
     }
 
     // Employee Relations
@@ -195,7 +203,7 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     {
         return $this->hasMany(Booking::class, 'employee_id')->with('payment');
     }
-    
+
     public function employeeEarnings()
     {
         return $this->hasMany(EmployeeEarning::class, 'employee_id');

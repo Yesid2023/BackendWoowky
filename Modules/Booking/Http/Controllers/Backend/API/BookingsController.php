@@ -83,7 +83,7 @@ class BookingsController extends Controller
                     'duration'=>$request->duration,
                     'booking_id' => $booking->id
                 ];
-                BookingTrainerMapping::updateOrCreate(['booking_id'=>$booking->id],$training);
+                BookingTrainerMapping::create($training);
                 break;
 
             case 'daycare':

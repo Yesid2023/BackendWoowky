@@ -425,6 +425,7 @@ const defaultData = () => {
 //  Reset Form
 const setFormData = (data) => {
   ImageViewer.value = data.profile_image
+  locationImages.value = data.location_images
 
   console.log(data.profile_image)
   resetForm({
@@ -458,6 +459,7 @@ const setFormData = (data) => {
       lodging_price: data.lodging_price,
       kindergarten_price: data.kindergarten_price,
       complete_care_price: data.complete_care_price,
+      location_images: data.location_images,
     }
   })
 }

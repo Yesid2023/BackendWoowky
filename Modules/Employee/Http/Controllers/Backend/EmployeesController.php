@@ -464,7 +464,7 @@ class EmployeesController extends Controller
 
         if ($request->file('location_images') && count($request->file('location_images')) > 0) {
             foreach ($request->file('location_images') as $image) {
-                storeMediaFile($data, $image, 'location_images');
+                storeMediaFile($data, $image, 'location_images', false);
             }
         }
 
@@ -588,6 +588,14 @@ class EmployeesController extends Controller
 
         $data['dribbble_link'] = $data->profile->dribbble_link ?? null;
 
+        $data['lodging_price'] = $data->profile->lodging_price ?? null;
+
+        $data['kindergarten_price'] = $data->profile->kindergarten_price ?? null;
+
+        $data['complete_care_price'] = $data->profile->complete_care_price ?? null;
+
+        $data['location_images'] = $data->location_images ?? [];
+
         return response()->json(['data' => $data, 'status' => true]);
     }
 
@@ -622,6 +630,16 @@ class EmployeesController extends Controller
             'dribbble_link' => $request->dribbble_link,
         ];
 
+        if ($request->lodging_price ) {
+            $profile['lodging_price'] = $request->lodging_price;
+        }
+        if ($request->kindergarten_price) {
+            $profile['kindergarten_price'] = $request->kindergarten_price;
+        }
+        if ($request->complete_care_price) {
+            $profile['complete_care_price'] = $request->complete_care_price;
+        }
+
         $data->profile()->updateOrCreate([], $profile);
 
         if ($request->custom_fields_data) {
@@ -632,6 +650,12 @@ class EmployeesController extends Controller
         if ($request->file('profile_image') != null) {
 
             storeMediaFile($data, $request->file('profile_image'), 'profile_image');
+        }
+
+        if ($request->file('location_images') && count($request->file('location_images')) > 0) {
+            foreach ($request->file('location_images') as $image) {
+                storeMediaFile($data, $image, 'location_images', false);
+            }
         }
 
 

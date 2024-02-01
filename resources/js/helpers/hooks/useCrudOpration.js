@@ -77,7 +77,13 @@ export const useRequest = () => {
     if (type !== undefined && type == 'file') {
       let formData = new FormData()
       Object.keys(body).map((fieldName) => {
-        formData.append(fieldName, formatValue(body[fieldName]))
+        if (Array.isArray(body[fieldName]) && body[fieldName].every((item) => item instanceof File)) {
+          body[fieldName].forEach((file, index) => {
+            formData.append(fieldName + '[' + index + ']', file)
+          })
+        } else {
+          formData.append(fieldName, formatValue(body[fieldName]))
+        }
       })
       formData.append('_method', 'PUT')
       return createRequestWithFormData(url(id), { Accept: 'application/json' }, formData)

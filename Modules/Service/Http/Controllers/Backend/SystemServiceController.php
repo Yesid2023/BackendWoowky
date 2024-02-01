@@ -46,7 +46,7 @@ class SystemServiceController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         $craete_title = 'service.system_services';
         $filter = [
             'status' => $request->status,
@@ -58,7 +58,7 @@ class SystemServiceController extends Controller
         $categories = Category::whereNull('parent_id')->get();
         $subcategories = Category::whereNotNull('parent_id')->get();
 
-        return view('service::backend.systemservice.index_datatable', compact('module_action', 'filter', 'categories', 'subcategories', 'columns', 'customefield','craete_title'));
+        return view('service::backend.systemservice.index_datatable', compact('module_action', 'filter', 'categories', 'subcategories', 'columns', 'customefield', 'craete_title'));
     }
 
     /**
@@ -71,7 +71,7 @@ class SystemServiceController extends Controller
         $employee_id = $request->employee_id;
         $category_id = $request->category_id;
         $branch_id = $request->branch_id;
-        $data = SystemService::where('status',1);
+        $data = SystemService::where('status', 1);
 
         $data = $data->get();
 
@@ -141,10 +141,10 @@ class SystemServiceController extends Controller
 
         $datatable = $datatable->eloquent($query)
             ->addColumn('check', function ($data) {
-                return '<input type="checkbox" class="form-check-input select-table-row"  id="datatable-row-'.$data->id.'"  name="datatable_ids[]" value="'.$data->id.'" onclick="dataTableRowCheck('.$data->id.')">';
+                return '<input type="checkbox" class="form-check-input select-table-row"  id="datatable-row-' . $data->id . '"  name="datatable_ids[]" value="' . $data->id . '" onclick="dataTableRowCheck(' . $data->id . ')">';
             })
             ->addColumn('image', function ($data) {
-                return '<img src='.$data->feature_image." class='avatar avatar-50 rounded-pill'>";
+                return '<img src=' . $data->feature_image . " class='avatar avatar-50 rounded-pill'>";
             })
             ->addColumn('action', function ($data) use ($module_name) {
                 return view('service::backend.systemservice.action_column', compact('module_name', 'data'));
@@ -157,7 +157,7 @@ class SystemServiceController extends Controller
 
                 return '
                     <div class="form-check form-switch ">
-                        <input type="checkbox" data-url="'.route('backend.service.systemservice.update_status', $row->id).'" data-token="'.csrf_token().'" class="switch-status-change form-check-input"  id="datatable-row-'.$row->id.'"  name="status" value="'.$row->id.'" '.$checked.'>
+                        <input type="checkbox" data-url="' . route('backend.service.systemservice.update_status', $row->id) . '" data-token="' . csrf_token() . '" class="switch-status-change form-check-input"  id="datatable-row-' . $row->id . '"  name="status" value="' . $row->id . '" ' . $checked . '>
                     </div>
                 ';
             });
@@ -175,7 +175,7 @@ class SystemServiceController extends Controller
         $term = trim($request->q);
 
         $query_data = User::role('employee')->where(function ($q) {
-            if (! empty($term)) {
+            if (!empty($term)) {
                 $q->orWhere('name', 'LIKE', "%$term%");
             }
         })->get();
@@ -185,7 +185,7 @@ class SystemServiceController extends Controller
         foreach ($query_data as $row) {
             $data[] = [
                 'id' => $row->id,
-                'name' => $row->first_name.$row->last_name,
+                'name' => $row->first_name . $row->last_name,
                 'avatar' => $row->profile_image,
             ];
         }
@@ -239,7 +239,7 @@ class SystemServiceController extends Controller
     {
         $data = SystemService::findOrFail($id);
 
-        if (! is_null($data)) {
+        if (!is_null($data)) {
             $custom_field_data = $data->withCustomFields();
             $data['custom_field_data'] = collect($custom_field_data->custom_fields_data)
                 ->filter(function ($value) {
@@ -272,7 +272,7 @@ class SystemServiceController extends Controller
             $data->updateCustomFieldData(json_decode($request->custom_fields_data));
         }
 
-        storeMediaFile($data, $request->file('feature_image'), 'feature_image');
+        storeMediaFile($data, $request->file('feature_image'), 'feature_image', true);
 
         $message = __('messages.update_form', ['form' => __('service.singular_title')]);
 

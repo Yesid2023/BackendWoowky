@@ -92,7 +92,7 @@ class Booking extends BaseModel
     }
     public function training()
     {
-        return $this->belongsTo(BookingTrainerMapping::class,'id','booking_id')->with('trainingtype','duration');
+        return $this->hasMany(BookingTrainerMapping::class)->with('trainingtype','duration');
     }
     public function daycare()
     {

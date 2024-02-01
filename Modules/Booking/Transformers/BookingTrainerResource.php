@@ -19,7 +19,7 @@ class BookingTrainerResource extends JsonResource
     public function toArray($request)
     {
         $tax_details =calculateTaxAmounts($this->payment?$this->payment->tax_percentage:null, ($this->service_amount));
-        return [
+        $response = [
             'id' => $this->id,
             'note' => $this->note,
             'status' => $this->status,
@@ -31,10 +31,6 @@ class BookingTrainerResource extends JsonResource
             'employee_id' => $this->employee_id,
             'employee_name' => optional($this->employee)->first_name . " ". optional($this->employee)->last_name,
             'employee_image' => optional($this->employee)->getFirstMediaUrl('profile_image'),
-            'price' => optional($this->training)->price,
-            'date_time' => optional($this->training)->date_time,
-            'training' => optional($this->training)->trainingtype,
-            'duration' => optional($this->training)->duration,
             'payment' => new PaymentResource($this->payment),
             'customer_id' => $this->user_id,
             'customer_name' => optional($this->user)->first_name . " ". optional($this->user)->last_name,
@@ -44,5 +40,15 @@ class BookingTrainerResource extends JsonResource
             'total_amount'=>(($this->service_amount)+TaxCalculation($this->service_amount ? $this->service_amount : 0))
 
         ];
+        $response['trainings'] = [];
+        foreach ($this->training as $training) {
+            $response['trainings'][] = [
+                'price' => optional($training)->price,
+                'date_time' => optional($training)->date_time,
+                'training' => optional($training)->trainingtype,
+                'duration' => optional($training)->duration,
+            ];
+        }
+        return $response;
     }
 }
