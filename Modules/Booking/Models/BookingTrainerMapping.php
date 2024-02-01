@@ -14,7 +14,14 @@ class BookingTrainerMapping extends Model
     use HasFactory;
     protected $table = 'booking_training_mapping';
     
-    protected $fillable = ['booking_id', 'date_time', 'training_id', 'price', 'duration'];
+    protected $fillable = [
+        'booking_id', 
+        'date_time', 
+        'training_id', 
+        'price', 
+        'duration',
+        'status',
+    ];
 
 
     public function booking()

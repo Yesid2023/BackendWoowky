@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Booking\Http\Controllers\Backend\API\BookingsController;
+use Modules\Booking\Http\Controllers\Backend\API\BookingTrainerMappingController;
 use Modules\Booking\Http\Controllers\Backend\API\PaymentController;
 
 Route::get('booking-status', [BookingsController::class, 'statusList']);
@@ -15,4 +16,6 @@ Route::group(['middleware' => 'auth:sanctum', 'as' => 'backend.'], function () {
     Route::post('save-payment', [PaymentController::class, 'savePayment']);
     Route::post('save-booking', [BookingsController::class, 'store']);
     Route::post('wompi-payment', [PaymentController::class, 'wompiPayment']);
+
+    Route::apiResource('training', BookingTrainerMappingController::class);
 });

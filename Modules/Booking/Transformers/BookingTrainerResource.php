@@ -43,10 +43,12 @@ class BookingTrainerResource extends JsonResource
         $response['trainings'] = [];
         foreach ($this->training as $training) {
             $response['trainings'][] = [
+                'id' => optional($training)->id,
                 'price' => optional($training)->price,
                 'date_time' => optional($training)->date_time,
                 'training' => optional($training)->trainingtype,
                 'duration' => optional($training)->duration,
+                'status' => optional($training)->status,
             ];
         }
         return $response;
